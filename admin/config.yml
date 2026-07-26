@@ -1,0 +1,30 @@
+backend:
+  name: git-gateway
+  branch: main
+locale: ko
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+collections:
+  - name: "schedule"
+    label: "교육 일정 관리"
+    files:
+      - name: "courses"
+        label: "교육 일정"
+        file: "data/courses.json"
+        format: "json"
+        fields:
+          - label: "교육 과정 목록"
+            name: "courses"
+            widget: "list"
+            summary: "{{fields.title}} · {{fields.date}} · {{fields.status}}"
+            fields:
+              - { label: "과정명", name: "title", widget: "string" }
+              - { label: "부제", name: "subtitle", widget: "string", required: false }
+              - { label: "교육 날짜", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+              - { label: "교육 시간", name: "time", widget: "string", default: "14:00~16:00" }
+              - { label: "과정 형태", name: "sessions", widget: "string", default: "원데이 클래스" }
+              - { label: "수강료", name: "price", widget: "string", default: "19,000원" }
+              - { label: "모집 정원", name: "capacity", widget: "number", value_type: "int", min: 1, default: 10 }
+              - { label: "현재 신청 인원", name: "applied", widget: "number", value_type: "int", min: 0, default: 0 }
+              - { label: "모집 상태", name: "status", widget: "select", options: ["모집중", "예정", "마감"] }
+              - { label: "과정 설명", name: "description", widget: "text" }
